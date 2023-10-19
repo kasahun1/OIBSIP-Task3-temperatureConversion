@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div id="time"></div>
+            <div class="icons">
+                <i class="bi bi-bell-slash-fill"></i>
+                <i class="bi bi-bluetooth"></i>
+                <i class="bi bi-battery-charging"></i>
+            </div>
+        </div>
+        <h1>Temperature Converter</h1>
+        <div class="inputs">
+            <div class="input-field">
+                <label for="degree">Enter value <span id="small">(In degree)</span></label>
+                <input type="number" name="degree" id="inputcelciusValue" required>
+            </div>
+            <div class="option">
+                <div>
+                    <label for="type">To</label>
+                    <select name="type" id="type">
+                        <option value="celcius">Celcius</option>
+                        <option value="fahrenheit">Fahrenheit</option>
+                        <option value="kelvin">Kelvin</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="result-area">
+            <label for="result">Result</label>
+            <div id="result"></div>
+        </div>
+        <button type="submit" id="btn" onclick="temperature()">Convert</button>
+    </div>
+   
+    <script>
+      function temperature() {
+    let inputcelciusValue = document.querySelector("#inputcelciusValue").value;
+    let type = document.querySelector("#type");
+    let result = document.querySelector("#result");
+
+    if (inputcelciusValue == "") {
+        alert("Please Enter any value")
+        location.reload()
+    }
+
+    else if(type.value == "celcius"){
+        let Celcius = Number(inputcelciusValue) * 1
+        result.innerHTML = Celcius.toFixed(2) + ` &deg;C`
+    }else if(type.value == "fahrenheit"){
+        let Fahrenheit = Number(inputcelciusValue) * (9/5) + 32
+        result.innerHTML = Fahrenheit.toFixed(2) + " F"
+    }else if(type.value == "kelvin"){
+        let Kelvin = Number(inputcelciusValue) + 273.15
+        result.innerHTML = Kelvin.toFixed(2) + " K"
+    }
+      }
+
+      function currentTime() {
+    let time = document.getElementById("time")
+    let date = new Date();
+    let hr = date.getHours();
+    let mn = date.getMinutes();
+    let ss = date.getSeconds();
+    let current_time = hr + ":" + mn + ":" + ss;
+    time.innerHTML = current_time;
+    let count = setTimeout(function () { currentTime() }, 1000);
+}
+currentTime();
+
+    </script>
+</body>
+
+</html>
